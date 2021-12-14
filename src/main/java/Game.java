@@ -3,12 +3,12 @@ enum Result {
     WON
 }
 
-public class Cricket {
+public class Game {
     private final int targetRuns;
     private final Batsman batsman;
     private Result result;
 
-    public Cricket(int targetRuns, Batsman batsman) {
+    public Game(int targetRuns, Batsman batsman) {
         this.targetRuns = targetRuns;
         this.batsman = batsman;
     }
