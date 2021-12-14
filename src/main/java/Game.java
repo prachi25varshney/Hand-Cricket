@@ -16,6 +16,16 @@ public class Game {
     public void play() {
         if (!validateTargetRuns(targetRuns))
             return;
+        chasingTargetRuns();
+        if (result == Result.WON) return;
+        result = Result.LOSE;
+    }
+
+    public Result result() {
+        return result;
+    }
+
+    private void chasingTargetRuns() {
         int totalRuns = 0;
         for (int i = 1; i <= 6; i++) {
             totalRuns = totalRuns + batsman.bat();
@@ -24,16 +34,11 @@ public class Game {
                 return;
             }
         }
-        result = Result.LOSE;
     }
 
     private boolean validateTargetRuns(int targetRuns) {
         int maxRunsPerOver = 36;
         return targetRuns <= maxRunsPerOver;
-    }
-
-    public Result result() {
-        return result;
     }
 
     private boolean isRunsChased(int totalRuns) {
