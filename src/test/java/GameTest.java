@@ -47,5 +47,16 @@ public class GameTest {
 
         assertThat(game.result(), is(equalTo(Result.LOST)));
     }
+
+    @Test
+    void shouldHitByHitterManWhenBatsmanTypeIsOne() {
+        Batsman batsman1 = new Batsman(Type.ONE);
+        Game game = new Game(10, 1, batsman1, bowler);
+        when(bowler.bowl()).thenReturn(1, 1, 2, 5, 2, 2);
+
+        game.play();
+
+        assertThat(game.result(), is(equalTo(Result.WON)));
+    }
 }
 
