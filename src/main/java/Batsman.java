@@ -5,10 +5,10 @@ public class Batsman {
     }
 
     public int bat() {
-        return getRandomNumberForRun();
+        return getRandomScoreForRun();
     }
 
-    private int getRandomNumberForRun() {
+    private int getRandomScoreForRun() {
         int maxRunPerBall = 6;
         Random random = new Random();
         return random.nextInt(maxRunPerBall);
