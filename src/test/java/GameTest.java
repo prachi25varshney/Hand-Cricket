@@ -1,26 +1,51 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class GameTest {
-    @Test
-    void shouldReturnWonOrLoseWhenBatsmanTargetRunsIsNotBeyondThirtySix() {
-        Batsman batsman = new Batsman();
-        Game game = new Game(28, batsman);
 
-        game.play();
+    Batsman batsman;
+    Bowler bowler;
 
-        assertThat(game.result(), anyOf(is(Result.WON), is(Result.LOSE)));
+    @BeforeEach
+    public void beforeEach() {
+        batsman = mock(Batsman.class);
+        bowler = mock(Bowler.class);
     }
 
     @Test
-    void shouldReturnNULLWhenBatsmanTargetRunsIsBeyondThirtySix() {
-        Batsman batsman = new Batsman();
-        Game game = new Game(45, batsman);
+    void shouldWonOrLoseWhenBatsmanTargetRunsIsNotBeyondThirtySix() {
+        Game game = new Game(12, 1, batsman, bowler);
+        when(batsman.bat()).thenReturn(2, 3, 4, 3);
 
         game.play();
 
-        assertThat(game.result(), is(equalTo(null)));
+        assertThat(game.result(), anyOf(is(Result.WON)));
+    }
+
+    @Test
+    void shouldLostWhenBatsmanCannotMakeTargetRunsInGivenOvers() {
+        Game game = new Game(45, 1, batsman, bowler);
+        when(batsman.bat()).thenReturn(2, 3, 4, 3, 5, 6);
+
+        game.play();
+
+        assertThat(game.result(), is(equalTo(Result.LOST)));
+    }
+
+    @Test
+    void shouldLostWhenBatsmanGotOut() {
+        Game game = new Game(28, 2, batsman, bowler);
+        when(batsman.bat()).thenReturn(2, 3, 4, 3, 5, 6);
+        when(bowler.bowl()).thenReturn(0, 1, 2, 5, 4, 6);
+
+        game.play();
+
+        assertThat(game.result(), is(equalTo(Result.LOST)));
     }
 }
+
