@@ -13,17 +13,17 @@ public class Batsman {
 
     public int bat() {
         if(this.type== Type.ZERO)
-            return getRandomScoreForTypeZeroBatsman();
-        return getRandomScoreForTypeOneBatsman();
+            return runsPerBallForTypeZeroBatsman();
+        return runsPerBallForTypeOneBatsman();
     }
 
-    private int getRandomScoreForTypeOneBatsman() {
+    private int runsPerBallForTypeOneBatsman() {
         int[] scores = new int[]{0, 4, 6};
         int random_index = new Random().nextInt(scores.length);
         return scores[random_index];
     }
 
-    private int getRandomScoreForTypeZeroBatsman() {
+    private int runsPerBallForTypeZeroBatsman() {
         int maxRunPerBall = 6;
         Random random = new Random();
         return random.nextInt(maxRunPerBall);

@@ -5,10 +5,10 @@ public class Bowler {
     }
 
     public int bowl() {
-        return getRandomScoreForBowling();
+        return runsPerBall();
     }
 
-    private int getRandomScoreForBowling() {
+    private int runsPerBall() {
         int maxRunPerBall = 6;
         Random random = new Random();
         return random.nextInt(maxRunPerBall);
